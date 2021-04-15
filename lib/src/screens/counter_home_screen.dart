@@ -24,12 +24,12 @@ class CounterHomeScreen extends StatefulWidget {
   // CounterHomeScreenState createState() => CounterHomeScreenState();
   //  yg diatas sama syntax commandnya dgn func () { return statement}
   @override
-  CounterHomeScreenState createState() {
-    return CounterHomeScreenState();
+  _CounterHomeScreenState createState() {
+    return _CounterHomeScreenState();
   }
 }
 
-class CounterHomeScreenState extends State<CounterHomeScreen> {
+class _CounterHomeScreenState extends State<CounterHomeScreen> {
   int _counter = 0;
   _increment() {
     //set state ada dlm sbuah sunction yg dipanggil oleh widget
@@ -62,6 +62,7 @@ class CounterHomeScreenState extends State<CounterHomeScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: _BottomNavigation(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: _increment,
@@ -69,6 +70,32 @@ class CounterHomeScreenState extends State<CounterHomeScreen> {
     );
   }
 }
+
+class _BottomNavigation extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.person), title: Text('Profile')),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.settings), title: Text('Settings')),
+      ],
+    );
+  }
+}
+
+/*
+bab9 - mmbuat navigation bottom bar
+navigtionbar dibuat didalam wiget scaffold penempatan setelah body ,dan ada 3 items 
+masing2 ,dan kita taruh defaultnya pada currentIndex:0 ; paling kiri
+nah jadi gini kit abisa buat class widget ini denga panggil namanya 
+nah nnatinya akan ada state tapi kita buat dulu dari staeless 
+nah kit aakan panggil widget dari atas ,kita buat class terpisaah dan kita panggil dari widgetfull
+nama widget navigtionbar utk yg 3 item ini kita buat di class ini terpisah sgn cara widgetbuil context
+
+
+*/
 
 /*
 tentang perubahan state nah jadi kalau mau ubah itu 
