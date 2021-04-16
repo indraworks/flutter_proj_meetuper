@@ -1,9 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:learn_meetup/src/screens/counter_home_screen.dart';
+import 'package:learn_meetup/src/screens/meetup_detail_screen.dart';
 
 void main() {
   runApp(MeetuperApp());
 }
+
+class MeetuperApp extends StatelessWidget {
+  final String appTitle = "Meetuper App";
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: CounterHomeScreen(title: appTitle),
+        routes: {'/meetupDetail': (context) => MeetupDetailScreen()});
+  }
+}
+/*
+Gimana cara buat route pastikan bahwa kit asudah buat 
+class anak widget difile disini di /screens dgn contoh meetup_detail_screen.dart
+nah stalh nya di main.dart buat routenya 
+/meetupDetail adalah nama route nanti componentnya mesti dipanggil 
+
+
+*/
 
 /*
 utk onPressed: _pressed ----disini kita gak manggil functionya

@@ -5,16 +5,6 @@ import 'package:flutter/material.dart';
 
 //manual
 
-class MeetuperApp extends StatelessWidget {
-  final String appTitle = "Meetuper App";
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(primarySwatch: Colors.blue),
-        home: CounterHomeScreen(title: appTitle));
-  }
-}
-
 class CounterHomeScreen extends StatefulWidget {
   final String _title;
   //constructornya
@@ -58,7 +48,12 @@ class _CounterHomeScreenState extends State<CounterHomeScreen> {
             ),
             Text('Clik Counter : $_counter ',
                 textDirection: TextDirection.ltr,
-                style: TextStyle(fontSize: 30.0))
+                style: TextStyle(fontSize: 30.0)),
+            RaisedButton(
+                child: Text('Goto Details'),
+                onPressed: () {
+                  return Navigator.pushNamed(context, '/meetupDetail');
+                }),
           ],
         ),
       ),
@@ -71,9 +66,25 @@ class _CounterHomeScreenState extends State<CounterHomeScreen> {
   }
 }
 
-class _BottomNavigation extends StatelessWidget {
+//ubah stateless jadi statefull
+class _BottomNavigation extends StatefulWidget {
+  @override
+  _BottomNavigationState createState() {
+    //jgn lupa stlah create state di bagian class anak tulis
+    // _BottomNavigationState extends state<_BottomNavigation>
+    return _BottomNavigationState();
+  }
+}
+
+class _BottomNavigationState extends State<_BottomNavigation> {
+  int _currentIndex = 0;
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      currentIndex: _currentIndex, //ini utk kasih index nilai
+      onTap: (int index) {
+        setState(() => _currentIndex = index);
+      },
+      //jika stap di click
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
         BottomNavigationBarItem(
@@ -93,6 +104,12 @@ nah jadi gini kit abisa buat class widget ini denga panggil namanya
 nah nnatinya akan ada state tapi kita buat dulu dari staeless 
 nah kit aakan panggil widget dari atas ,kita buat class terpisaah dan kita panggil dari widgetfull
 nama widget navigtionbar utk yg 3 item ini kita buat di class ini terpisah sgn cara widgetbuil context
+
+-utk mmbuat function on TAp maka harus ada inputan int yg passing utk iut
+onTap:(int index) {} //disini ktka nanti diklik maka akan terlihat nilai index
+ktika item bottom navigation di pilih dan diklik/onTap
+
+syarat2 ubah statefless jadi stastefull
 
 
 */
