@@ -57,11 +57,7 @@ class _CounterHomeScreenState extends State<CounterHomeScreen> {
           ],
         ),
       ),
-<<<<<<< HEAD
       bottomNavigationBar: BottomNavigation(),
-=======
-      bottomNavigationBar: _BottomNavigation(),
->>>>>>> 9498d0131b79c8ed2083cd40f9ca90f4c89bccbb
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: _increment,
@@ -70,25 +66,7 @@ class _CounterHomeScreenState extends State<CounterHomeScreen> {
   }
 }
 
-<<<<<<< HEAD
 /*o apps for pc linux
-=======
-class _BottomNavigation extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.person), title: Text('Profile')),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.settings), title: Text('Settings')),
-      ],
-    );
-  }
-}
-
-/*
->>>>>>> 9498d0131b79c8ed2083cd40f9ca90f4c89bccbb
 bab9 - mmbuat navigation bottom bar
 navigtionbar dibuat didalam wiget scaffold penempatan setelah body ,dan ada 3 items 
 masing2 ,dan kita taruh defaultnya pada currentIndex:0 ; paling kiri
@@ -97,15 +75,12 @@ nah nnatinya akan ada state tapi kita buat dulu dari staeless
 nah kit aakan panggil widget dari atas ,kita buat class terpisaah dan kita panggil dari widgetfull
 nama widget navigtionbar utk yg 3 item ini kita buat di class ini terpisah sgn cara widgetbuil context
 
-<<<<<<< HEAD
 -utk mmbuat function on TAp maka harus ada inputan int yg passing utk iut
 onTap:(int index) {} //disini ktka nanti diklik maka akan terlihat nilai index
 ktika item bottom navigation di pilih dan diklik/onTap
 
 syarat2 ubah statefless jadi stastefull
 
-=======
->>>>>>> 9498d0131b79c8ed2083cd40f9ca90f4c89bccbb
 
 */
 
