@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_meetup/src/screens/widgets/bottom_navigation.dart';
 
 class MeetupDetailScreen extends StatelessWidget {
   static final String route = '/meetupDetail';
@@ -10,6 +11,8 @@ class MeetupDetailScreen extends StatelessWidget {
       body: Center(
         child: Text('Iam Meetup Detail Screen'),
       ),
+      bottomNavigationBar: BottomNavigation(), //kita kasih juga agar muncul
+      //dipagenya neetup_detail
     );
   }
 }

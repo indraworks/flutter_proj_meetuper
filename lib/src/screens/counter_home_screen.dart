@@ -8,10 +8,10 @@ import 'widgets/bottom_navigation.dart';
 //manual
 
 class CounterHomeScreen extends StatefulWidget {
-  final String _title;
-  //constructornya
-  //
-  CounterHomeScreen({String title}) : _title = title;
+  // final String _title;
+  // //constructornya
+  // //
+  // CounterHomeScreen({String title}) : _title = title; //gak perlu smntara utk latihan jsonplaceholder
 
   // CounterHomeScreenState createState() => CounterHomeScreenState();
   //  yg diatas sama syntax commandnya dgn func () { return statement}
