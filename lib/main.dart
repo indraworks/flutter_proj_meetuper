@@ -13,7 +13,8 @@ class MeetuperApp extends StatelessWidget {
     return MaterialApp(
         theme: ThemeData(primarySwatch: Colors.blue),
         home: CounterHomeScreen(title: appTitle),
-        routes: {'/meetupDetail': (context) => MeetupDetailScreen()});
+        routes: {MeetupDetailScreen.route: (context) => MeetupDetailScreen()});
+    //  kita ganti routes: {'/meetupDetail': (context) => MeetupDetailScreen()});
   }
 }
 /*
@@ -21,6 +22,7 @@ Gimana cara buat route pastikan bahwa kit asudah buat
 class anak widget difile disini di /screens dgn contoh meetup_detail_screen.dart
 nah stalh nya di main.dart buat routenya 
 /meetupDetail adalah nama route nanti componentnya mesti dipanggil 
+utk route bsa kita improve dengan pakai variabel
 
 
 */

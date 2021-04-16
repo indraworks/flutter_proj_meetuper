@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/bottom_navigation.dart';
+
 //kita refactoring isi dari code,nama class sama
 //sesuai dgn nama file dartnya
 
@@ -51,13 +53,11 @@ class _CounterHomeScreenState extends State<CounterHomeScreen> {
                 style: TextStyle(fontSize: 30.0)),
             RaisedButton(
                 child: Text('Goto Details'),
-                onPressed: () {
-                  return Navigator.pushNamed(context, '/meetupDetail');
-                }),
+                onPressed: () => Navigator.pushNamed(context, '/meetupDetail')),
           ],
         ),
       ),
-      bottomNavigationBar: _BottomNavigation(),
+      bottomNavigationBar: BottomNavigation(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: _increment,
@@ -66,37 +66,7 @@ class _CounterHomeScreenState extends State<CounterHomeScreen> {
   }
 }
 
-//ubah stateless jadi statefull
-class _BottomNavigation extends StatefulWidget {
-  @override
-  _BottomNavigationState createState() {
-    //jgn lupa stlah create state di bagian class anak tulis
-    // _BottomNavigationState extends state<_BottomNavigation>
-    return _BottomNavigationState();
-  }
-}
-
-class _BottomNavigationState extends State<_BottomNavigation> {
-  int _currentIndex = 0;
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex, //ini utk kasih index nilai
-      onTap: (int index) {
-        setState(() => _currentIndex = index);
-      },
-      //jika stap di click
-      items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.person), title: Text('Profile')),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.settings), title: Text('Settings')),
-      ],
-    );
-  }
-}
-
-/*
+/*o apps for pc linux
 bab9 - mmbuat navigation bottom bar
 navigtionbar dibuat didalam wiget scaffold penempatan setelah body ,dan ada 3 items 
 masing2 ,dan kita taruh defaultnya pada currentIndex:0 ; paling kiri

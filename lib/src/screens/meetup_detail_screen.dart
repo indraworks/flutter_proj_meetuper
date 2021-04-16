@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MeetupDetailScreen extends StatelessWidget {
+  static final String route = '/meetupDetail';
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -9,7 +10,6 @@ class MeetupDetailScreen extends StatelessWidget {
       body: Center(
         child: Text('Iam Meetup Detail Screen'),
       ),
-      
     );
   }
 }
