@@ -42,7 +42,8 @@ class _CounterHomeScreenState extends State<CounterHomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Welcome to our ${widget._title},lets increment number!', //karna _title ada diluar class
+              'Welcome to our ,lets increment number!', //karna _title ada diluar class
+              //${widget._title}
               //dluar class dan berada di statefullwidget
               //kita pake widget utk ambil variable ttitlenya,
               textDirection: TextDirection.ltr,
@@ -187,6 +188,22 @@ kalau mau lihat klikkanann uk import package yg tidak ada
 pilih import
 
 
+
+
+*/
+
+/*
+void main() {
+  Map<String,dynamic> posts = {
+     "userId": 1,
+    "id": 1,
+    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+    "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+  };
+  print(posts['title']); // kita ambil keynya utk tampilkan objectnya  atau valuenya 
+  kalau map mau liat kasih liaat object maka yg ditunjuk aada lah keynya 
+  
+}
 
 
 */

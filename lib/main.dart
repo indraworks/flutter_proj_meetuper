@@ -14,9 +14,9 @@ class MeetuperApp extends StatelessWidget {
     return MaterialApp(
         theme: ThemeData(primarySwatch: Colors.blue),
         // home: CounterHomeScreen(title: appTitle), //temporary utk atihan jsonplaceholder
-        home: PostScreen(),
-        routes: {MeetupDetailScreen.route: (context) => MeetupDetailScreen()});
-    //  kita ganti routes: {'/meetupDetail': (context) => MeetupDetailScreen()});
+        home: PostScreen(), //temporary home lari ke PostScreen() page
+        // routes: {MeetupDetailScreen.route: (context) => MeetupDetailScreen()});
+        routes: {'/meetupDetail': (context) => MeetupDetailScreen()});
   }
 }
 /*

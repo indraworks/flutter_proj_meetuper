@@ -22,7 +22,7 @@ Gimana cara buat route pastikan bahwa kit asudah buat
 class anak widget difile disini di /screens dgn contoh meetup_detail_screen.dart
 nah stalh nya di main.dart buat routenya 
 nama classnya tadi sbgai rujukan 
-nah di chilc class buat widget 
+nah di children class buat widget 
 RaisedButton( 
   child:Text('GotoDetailed'),
   onPressed:() {
