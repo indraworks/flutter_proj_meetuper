@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_meetup/src/models/post.dart';
 
 import 'widgets/bottom_navigation.dart';
 import 'package:http/http.dart' as http; //kita import
@@ -27,22 +28,34 @@ class PostScreen extends StatefulWidget {
 class _PostScreenState extends State<PostScreen> {
   //kit ambuat varable penampung krn yg dikeluarkan adalah array kita
   //dart pake list
-  List<dynamic> _posts = [];
+
+  List<Post> _posts = [];
+  //kita ganti  asal mula //List<dynamic> _posts = []; //type datanya adalah dynamic
+  //dimana <Post> adalah typedatanya dari class Post
+
 //pengenalan listView :
 //https://medium.com/nusanet/flutter-listview-7de1759b4fb1
 //jadi dibuat initState yg didalamnya ada super.initState
 ////krn module ini diambil dari parent  nah baru dibawahnya ada
-// functon ambil data disrever yaitu fetchPost
+// functon ambil data diserver yaitu fetchPost
 
   void initState() {
     super.initState(); //panggil initstate
-    _fetchPost();
+    _fetchPost(); //buat judul func utk panggil
   }
 
   void _fetchPost() {
     http.get('https://jsonplaceholder.typicode.com/posts').then((res) {
-      final posts = jsonDecode(res.body);
+      //final posts = jsonDecode(res.body);
+      //ktika then res data uda kluar ,dimabil
+      //dlm bntuk 1 page res.body,nah skrg kita masukan hasil json kdlm variable list
+      final List<dynamic> parsePosts =
+          jsonDecode(res.body); //parse string balikinke obj
+      final posts = parsePosts.map((parsePost) {
+        return Post.fromJSON(parsePost); //Post import dari class Post;
+      }).toList(); //pake toList isinya kan 2 dan iterable
       setState(() => _posts = posts);
+      //yg _post dimasukan ke _PostList(posts:_posts)
     });
   }
 
@@ -51,7 +64,7 @@ class _PostScreenState extends State<PostScreen> {
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: Text('Posts')),
       body: _PostList(posts: _posts), //artinya hasil variable local _post
-      //dimasukan kedalam param posts pada kontstructor _Postlist dibawah
+      //dimasukan kedalam param posts pada kontstructor di class _Postlist dibawah
       //agar nilai bisa dimap ditampilkan lewat ListView amazing :D
       bottomNavigationBar: BottomNavigation(),
       floatingActionButton: FloatingActionButton(
@@ -85,9 +98,9 @@ class _PostList extends StatelessWidget {
 
   //buat posts constructor
   //yg dalam kurung diknstructor adalah param dari luar
-  //({List<dynamic> posts}) nah strlah tanda : adalah _posts =  posts
+  //({List<dynamic> posts}) nah stelah tanda : adalah _posts =  posts
   //artinay posts param dari luar di berikan pasing ke variable local _posts
-  _PostList({List<dynamic> posts}) : _posts = posts;
+  _PostList({@required List<dynamic> posts}) : _posts = posts;
 
   @override
   Widget build(BuildContext context) {
@@ -108,15 +121,19 @@ class _PostList extends StatelessWidget {
     ///////buat listbuilder dan divider()
     return ListView.builder(
       itemCount: _posts.length *
-          2, //itemCount ini sama kayak itemBuilder properties dari listView.Builder
+          2, //itemCount ini *2  sama kayak itemBuilder properties dari listView.Builder
       itemBuilder: (BuildContext context, int i) {
         //ingat i ini sama dgn itemCOunt nilai max-nya
+        print(i);
+        print(_posts.length);
         if (i.isOdd) {
           return Divider(); //jika ganjil maka render diayar widget Divider/garis pemisah
 
         }
-        final index = i ~/ 2;
+        final index = i ~/ 2; //hasil harus selalu bntuk integer
         return ListTile(
+          //listTitle builtun rendering <widget>list dlm txt makanya
+          //diubah dulu lwat Text!
           title: Text(_posts[index]['title']),
           subtitle: Text(_posts[index]['body']),
         );
@@ -124,6 +141,28 @@ class _PostList extends StatelessWidget {
     );
   }
 }
+
+/* //// PENJELASAN PROGRAM
+http.get('https://jsonplaceholder.typicode.com/posts').then((res) {
+      //final posts = jsonDecode(res.body);
+      //ktika then res data uda kluar ,dimabil
+      //dlm bntuk 1 page res.body,nah skrg kita masukan hasil json kdlm variable list
+      final List<dynamic> parsePosts =
+          jsonDecode(res.body); //parse string balikinke obj
+      final posts = parsePosts.map((parsePost) {
+        return Post.fromJSON(parsePost); //Post import dari class Post;
+      }).toList(); //pake toList isinya kan 2 dan iterable
+
+jadi gini:stlah dapat ttp.get maka didecode dulu dlm bntuk object 
+dimasukan list  final List<dynamic> parsePosts =
+          jsonDecode(res.body)
+nah kmudian dimaping ,nah utk munculkan kita pake Post krn udah parse masing2 dari parseJosn ke 
+bntuk object lewat Post class 
+ final posts = parsePosts.map((parsePost) {
+        return Post.fromJSON(parsePost) //ingat Postnya dari class di /model/Post.dart
+
+
+*/
 
 /*
 kita akan buat list builder yg jadi masalah adalah ketika di scroll
