@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:learn_meetup/src/models/post.dart';
 
 import 'widgets/bottom_navigation.dart';
-import 'package:http/http.dart' as http; //kita import
-//sblumnya istall atau tulis file yaml
-////sumber http: ===========>>>>https://pub.dev/packages/http
-//kita taruh di yaml file : http: ^0.12.0+2  otomatis ntr menginstall dengan sendirinya
-import 'dart:convert'; //utk convert object json jadi string
 
 //kita refactoring isi dari code,nama class sama
 //sesuai dgn nama file dartnya
@@ -43,21 +38,7 @@ class _PostScreenState extends State<PostScreen> {
     super.initState(); //panggil initstate
     _fetchPost(); //buat judul func utk panggil
   }
-
-  void _fetchPost() {
-    http.get('https://jsonplaceholder.typicode.com/posts').then((res) {
-      //final posts = jsonDecode(res.body);
-      //ktika then res data uda kluar ,dimabil
-      //dlm bntuk 1 page res.body,nah skrg kita masukan hasil json kdlm variable list
-      final List<dynamic> parsePosts =
-          jsonDecode(res.body); //parse string balikinke obj
-      final posts = parsePosts.map((parsePost) {
-        return Post.fromJSON(parsePost); //Post import dari class Post;
-      }).toList(); //pake toList isinya kan 2 dan iterable
-      setState(() => _posts = posts);
-      //yg _post dimasukan ke _PostList(posts:_posts)
-    });
-  }
+  // note :fecthpost dipindah ke class service_api_provider
 
   Widget build(BuildContext context) {
     print('aim calling build');
@@ -94,13 +75,14 @@ class _PostList extends StatelessWidget {
   //widget build dari _PostScreen
 
   //buat instaciate variable _posts
-  final List<dynamic> _posts; //ini localnya
+  final List<Post>
+      _posts; //ini localnya sblumnya <dinmay> digantik typedata jadi <Post>
 
   //buat posts constructor
   //yg dalam kurung diknstructor adalah param dari luar
   //({List<dynamic> posts}) nah stelah tanda : adalah _posts =  posts
   //artinay posts param dari luar di berikan pasing ke variable local _posts
-  _PostList({@required List<dynamic> posts}) : _posts = posts;
+  _PostList({@required List<Post> posts}) : _posts = posts;
 
   @override
   Widget build(BuildContext context) {
@@ -134,8 +116,10 @@ class _PostList extends StatelessWidget {
         return ListTile(
           //listTitle builtun rendering <widget>list dlm txt makanya
           //diubah dulu lwat Text!
-          title: Text(_posts[index]['title']),
-          subtitle: Text(_posts[index]['body']),
+          // title: Text(_posts[index]['title']), yg lama  skrg bisa pakai dot krn object
+          // subtitle: Text(_posts[index]['body']),
+          title: Text(_posts[index].title),
+          subtitle: Text(_posts[index].body),
         );
       },
     );
