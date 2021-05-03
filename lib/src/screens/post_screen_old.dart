@@ -2,12 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:learn_meetup/src/models/post.dart';
 import 'package:learn_meetup/src/services/post_api_provider.dart';
 import 'widgets/bottom_navigation.dart';
-import 'package:faker/faker.dart';
+import 'package:faker/faker.dart'; //panggl faker utk nambah data dari faker
+
+//kita refactoring isi dari code,nama class sama
+//sesuai dgn nama file dartnya
+
 //manual
 
 class PostScreen extends StatefulWidget {
-  PostAPiProvider _api = new PostAPiProvider();
-//declarsi new APi dari class PostAPiProvider
+  PostAPiProvider _api = new PostAPiProvider(); //kita gunakan functionya
+  //kalau statement ditaruh diatas diclass widget maka di anak kelas harus
+  //paggil widget. ( wajib! nama instance + nama func) sbb: widget._api.fetchPost()
+
+  // final String _title; gak perlu title!
+  // //constructornya
+  // //
+  // PostScreen({String title}) : _title = title;
+
+  // PostScreenState createState() => PostScreenState();
+  //  yg diatas sama syntax commandnya dgn func () { return statement}
+
   @override
   _PostScreenState createState() => _PostScreenState();
 }
@@ -17,6 +31,18 @@ class _PostScreenState extends State<PostScreen> {
   //dart pake list
 
   List<Post> _posts = [];
+  //kita ganti  asal mula //List<dynamic> _posts = []; //type datanya adalah dynamic
+  //dimana <Post> adalah typedatanya dari class Post
+
+//pengenalan listView :
+//https://medium.com/nusanet/flutter-listview-7de1759b4fb1
+//jadi dibuat initState yg didalamnya ada super.initState
+////krn module ini diambil dari parent  nah baru dibawahnya ada
+// functon ambil data diserver yaitu fetchPost
+
+  //post_api_provider disini
+
+  // kalau sekarang bisa langsung tanpa new
 
   void initState() {
     super.initState(); //panggil initstate
@@ -45,62 +71,73 @@ class _PostScreenState extends State<PostScreen> {
   }
 
   Widget build(BuildContext context) {
-    return _PostList(
-        //mangil class staeless dan masukan parameter kesana
-        posts: _posts,
-        createPost: _addPost); //pasing di costructor createPost: _addPost
-
-    //jadi refactor nama header function stateless widgte disini
-    //distatefullwidget masukan paramnya biar diprossess,nah krn pemanggil atau
-    //header di parent dan olah di anak dan statelesss widget gak ada state sbb state hanya ada di statefull
-    //widgte gimana cara olahnya?
-    //caranya yaitu kita buat function di _postlist stateles kita passing diconstructornya
-    //
-    //
-    //
-  }
-}
-
-class _PostList extends StatelessWidget {
-  final List<Post> _posts;
-  //ini localnya sblumnya <dinmay> digantik typedata jadi <Post>
-  final Function createPost;
-
-  _PostList(
-      {@required
-          List<Post> posts,
-      //  @required Function() createPost ganti pakai this.
-      @required
-          this.createPost}) //dipasung di constructor  functionnya createPost
-      : _posts = posts;
-
-  @override
-  Widget build(BuildContext context) {
+    print('aim calling build');
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: Text('Posts')),
-      body: ListView.builder(
-        itemCount: _posts.length * 2,
-        itemBuilder: (BuildContext context, int i) {
-          //ingat i ini sama dgn itemCOunt nilai max-nya
-          print(i);
-          print(_posts.length);
-          if (i.isOdd) {
-            return Divider(); //jika ganjil maka render diayar widget Divider/garis pemisah
-
-          }
-          final index = i ~/ 2; //hasil harus selalu bntuk integer
-          return ListTile(
-            title: Text(_posts[index].title),
-            subtitle: Text(_posts[index].body),
-          );
-        },
-      ),
+      body: _PostList(posts: _posts), //artinya hasil variable local _post
+      //dimasukan kedalam param posts pada kontstructor di class _Postlist dibawah
+      //agar nilai bisa dimap ditampilkan lewat ListView amazing :D
       bottomNavigationBar: BottomNavigation(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: createPost, //pangil func createPost ktika button press
+        onPressed: _addPost, //tanpa tanda () krn method
         tooltip: 'Add Post',
       ),
+    );
+  }
+}
+
+/*
+next capther adalah kita lihat dalam 1 layar mesti ada 17 line listView saja 
+gak smua di tampilkan ke scrol kita bahas di bab berikutnya
+
+*/
+
+/*
+tugas assignment:
+create new stateless widget "_PostList" didalam post_screen.dart 
+move ListView dari body widget ke widget di _Postlist
+provide PsotList to body of scafold in PostScreen
+buat kosntructor didalam _Poslist dan pass _post :posts didalam constructor
+sbb:
+*/
+class _PostList extends StatelessWidget {
+  //nah Postlis nani dimasukan ke body di atas
+  //widget build dari _PostScreen
+
+  //buat instaciate variable _posts
+  final List<Post>
+      _posts; //ini localnya sblumnya <dinmay> digantik typedata jadi <Post>
+
+  //buat posts constructor
+  //yg dalam kurung diknstructor adalah param dari luar
+  //({List<dynamic> posts}) nah stelah tanda : adalah _posts =  posts
+  //artinay posts param dari luar di berikan pasing ke variable local _posts
+  _PostList({@required List<Post> posts}) : _posts = posts;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: _posts.length *
+          2, //itemCount ini *2  sama kayak itemBuilder properties dari listView.Builder
+      itemBuilder: (BuildContext context, int i) {
+        //ingat i ini sama dgn itemCOunt nilai max-nya
+        print(i);
+        print(_posts.length);
+        if (i.isOdd) {
+          return Divider(); //jika ganjil maka render diayar widget Divider/garis pemisah
+
+        }
+        final index = i ~/ 2; //hasil harus selalu bntuk integer
+        return ListTile(
+          //listTitle builtun rendering <widget>list dlm txt makanya
+          //diubah dulu lwat Text!
+          // title: Text(_posts[index]['title']), yg lama  skrg bisa pakai dot krn object
+          // subtitle: Text(_posts[index]['body']),
+          title: Text(_posts[index].title),
+          subtitle: Text(_posts[index].body),
+        );
+      },
     );
   }
 }

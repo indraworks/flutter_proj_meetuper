@@ -11,20 +11,41 @@ import 'dart:convert';
 import 'package:learn_meetup/src/models/post.dart'; //utk convert object json jadi string
 
 class PostAPiProvider {
- 
+  //buat singleton
+  ////utk buat instance yg sama tiap dcreate otomatic
+  static final PostAPiProvider _singleton = PostAPiProvider._internal();
+  factory PostAPiProvider() => _singleton;
+
+  PostAPiProvider._internal();
+
   Future<List<Post>> fetchPost() async {
-    final res = await http
-        .get('https://jsonplaceholder.typicode.com/posts')
-       
-      final List<dynamic> parsePosts = jsonDecode(res.body);
-      final posts = parsePosts.map((parsePost) {
-        return Post.fromJSON(parsePost);
-      }).toList();
-   
+    final res = await http.get('https://jsonplaceholder.typicode.com/posts');
+    final List<dynamic> parsePosts = jsonDecode(res.body);
+
+    return parsePosts
+        .map((parsePost) {
+          //kita bisa batasi list dgn metohde take
+          ////kita ilangin return {} conver jadi ()=> 1 line
+          return Post.fromJSON(parsePost);
+        })
+        .take(2)
+        .toList();
   }
 }
 
-/* lama:/old
+////////////////CATATAN ////////////////////////
+/*
+///
+///
+///
+///
+///
+ kita akkan imolemntasikann singleton pada class PostApiProvider
+
+//nah nanit PostAPiPRofivder dipakai utk isntansiate _api yg kita punya
+//
+
+ lama:/old
 
  void _fetchPost() async {
     http.get('https://jsonplaceholder.typicode.com/posts').then((res) {
