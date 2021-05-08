@@ -10,7 +10,7 @@ class Post {
   final String title;
   final String body;
   final int id;
-  Post({String title, String body, int id}) //konstructor ari class Post
+  Post({String title, String body, int id}) //konstructor dari class Post
       : this.title = title,
         this.body = body,
         this.id = id;
