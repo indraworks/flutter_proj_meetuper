@@ -51,7 +51,7 @@ class _PostScreenState extends State<PostScreen> {
 
   // note :fecthpost dipindah ke class service_api_provider
   _fetchPost() async {
-    List<Post> posts = await widget._api.fetchPost();
+    List<Post> posts = await widget._api.fetchAPIPost();
     setState(() => _posts = posts);
   }
 

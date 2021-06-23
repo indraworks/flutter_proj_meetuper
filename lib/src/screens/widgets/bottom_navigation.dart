@@ -24,10 +24,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
       },
       //jika stap di click
       items: [
+        // ignore: deprecated_member_use
         BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
         BottomNavigationBarItem(
+            // ignore: deprecated_member_use
             icon: Icon(Icons.person), title: Text('Profile')),
         BottomNavigationBarItem(
+            // ignore: deprecated_member_use
             icon: Icon(Icons.settings), title: Text('Settings')),
       ],
     );

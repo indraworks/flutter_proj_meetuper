@@ -20,3 +20,13 @@ class Post {
         body = parsedJson['body'],
         id = parsedJson['id'];
 }
+
+
+/*
+jadi kalau mau ambild data dari server msti pakai json package yg dipakai dart:convert
+https://flutter.dev/docs/development/data-and-backend/json
+
+
+
+
+*/

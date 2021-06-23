@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 // import 'package:learn_meetup/src/screens/counter_home_screen.dart';
 import 'package:learn_meetup/src/screens/meetup_detail_screen.dart';
+import 'package:learn_meetup/src/screens/meetup_home_screen.dart';
 import 'package:learn_meetup/src/screens/post_screen.dart';
+import 'package:learn_meetup/src/state/app_state.dart';
 
 void main() {
-  runApp(MeetuperApp());
+  // runApp(AppStore(child: MeetuperApp())); //meetuper diwraping sbgai memalui
+  runApp(MeetuperApp()); //meetuper diwraping sbgai memalui
+  //passing pada argument child di AppStore.
 }
 
 class MeetuperApp extends StatelessWidget {
@@ -14,7 +18,8 @@ class MeetuperApp extends StatelessWidget {
     return MaterialApp(
         theme: ThemeData(primarySwatch: Colors.blue),
         // home: CounterHomeScreen(title: appTitle), //temporary utk atihan jsonplaceholder
-        home: PostScreen(), //temporary home lari ke PostScreen() page
+        // home: PostScreen(), //temporary home lari ke PostScreen() page
+        home: MeetupHomeScreen(),
         // routes: {MeetupDetailScreen.route: (context) => MeetupDetailScreen()});
         routes: {'/meetupDetail': (context) => MeetupDetailScreen()});
   }

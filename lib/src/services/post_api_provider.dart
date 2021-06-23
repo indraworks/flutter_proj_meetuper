@@ -1,6 +1,6 @@
 /*
 pindahkan fetchPosts  dari post_screen.dart agar lebih rapi dan readible 
-module api biar disni semua ,jgn lua import juga package nya darisitu juga
+module api biar disni semua ,jgn lupa import juga package nya darisitu juga
 dan kit abuat sync await jgn lupa pakai future
 */
 import 'package:http/http.dart' as http; //kita import
@@ -18,7 +18,7 @@ class PostAPiProvider {
 
   PostAPiProvider._internal();
 
-  Future<List<Post>> fetchPost() async {
+  Future<List<Post>> fetchAPIPost() async {
     final res = await http.get('https://jsonplaceholder.typicode.com/posts');
     final List<dynamic> parsePosts = jsonDecode(res.body);
 
