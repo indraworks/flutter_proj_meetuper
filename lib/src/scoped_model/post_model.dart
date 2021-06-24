@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:learn_meetup/src/models/post.dart';
-import 'package:learn_meetup/src/scoped_model/post_model.dart';
+// import 'package:learn_meetup/src/scoped_model/post_model.dart';
 import 'package:faker/faker.dart';
 import 'package:learn_meetup/src/services/post_api_provider.dart';
 import 'package:scoped_model/scoped_model.dart'; //kita install lib 1.0.1
